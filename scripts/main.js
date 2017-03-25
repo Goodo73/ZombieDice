@@ -24,6 +24,7 @@ $(function() {
     // var p1Name = p1.getName();
     // console.log(p1Name);
 
+    // console.log(createDice('yellow',6));
 });
 
 // Obtain a random number between min & max (inclusive)
@@ -31,17 +32,29 @@ function getRandomNumber (min,max) {
     return Math.floor(Math.random() * ((max + 1) - min)) + min;
 }
 
+// Accept a die colour and number of dice to create
+// Returns an Array
+function createDice (colour, amount) {
+    var dice = [];
+
+    for (var i = 0; i < amount; i++) {
+        dice.push(new Die(colour));
+    };
+
+    return dice;
+}
+
 function Die (colour) {
     this.colour = colour;
-    this.currentDieFace = null;
+    this.currentFace = null;
     this.resetFace = function() {
-        this.currentDieFace = null;
+        this.currentFace = null;
     };
     this.setFace = function(face) {
-        this.currentDieFace = face;
+        this.currentFace = face;
     };
     this.getFace = function() {
-        return this.currentDieFace;
+        return this.currentFace;
     };
     this.getColour = function() {
         return this.colour;
