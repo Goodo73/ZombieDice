@@ -8,17 +8,22 @@ $(function() {
         'red': ['bang','run','bang','bang','run','brain']
     };
 
-    var die = new Die('green');
-    var colour = die.getDieColour();
-    console.log(colour);
-    var face = die.getDieFace();
-    console.log(face);
-    var type = dieType[colour][3]
-    console.log(type);
-    die.setDieFace(type);
-    console.log(die.getDieFace());
-    die.resetDieFace();
-    console.log(die.getDieFace());
+    // var die = new Die('green');
+    // var colour = die.getColour();
+    // console.log(colour);
+    // var face = die.getFace();
+    // console.log(face);
+    // var type = dieType[colour][3]
+    // console.log(type);
+    // die.setFace(type);
+    // console.log(die.getFace());
+    // die.resetFace();
+    // console.log(die.getFace());
+
+    // var p1 = new Player('Mike');
+    // var p1Name = p1.getName();
+    // console.log(p1Name);
+
 });
 
 // Obtain a random number between min & max (inclusive)
@@ -29,16 +34,23 @@ function getRandomNumber (min,max) {
 function Die (colour) {
     this.colour = colour;
     this.currentDieFace = null;
-    this.resetDieFace = function() {
+    this.resetFace = function() {
         this.currentDieFace = null;
     };
-    this.setDieFace = function(face) {
+    this.setFace = function(face) {
         this.currentDieFace = face;
     };
-    this.getDieFace = function() {
+    this.getFace = function() {
         return this.currentDieFace;
     };
-    this.getDieColour = function() {
+    this.getColour = function() {
         return this.colour;
+    };
+}
+
+function Player (name) {
+    this.name = name;
+    this.getName = function() {
+        return this.name;
     };
 }
