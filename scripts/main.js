@@ -24,17 +24,21 @@ $(function() {
     // var p1Name = p1.getName();
     // console.log(p1Name);
 
-    // console.log(createDice('yellow',6));
+    // var cup = new Cup();
+    // cup.addDie(new Die('green'));
+    // cup.addDie(new Die('yellow'));
+    // cup.addDie(new Die('red'));
+    // cup.shakeCup();
 });
 
 // Obtain a random number between min & max (inclusive)
-function getRandomNumber (min,max) {
+function getRandomNumber(min,max) {
     return Math.floor(Math.random() * ((max + 1) - min)) + min;
 }
 
 // Accept a die colour and number of dice to create
-// Returns an Array
-function createDice (colour, amount) {
+// Returns an array of the created dice
+function createDice(colour, amount) {
     var dice = [];
 
     for (var i = 0; i < amount; i++) {
@@ -44,7 +48,7 @@ function createDice (colour, amount) {
     return dice;
 }
 
-function Die (colour) {
+function Die(colour) {
     this.colour = colour;
     this.currentFace = null;
     this.resetFace = function() {
@@ -61,9 +65,22 @@ function Die (colour) {
     };
 }
 
-function Player (name) {
+function Player(name) {
     this.name = name;
     this.getName = function() {
         return this.name;
+    };
+}
+
+function Cup() {
+    this.currentDice = [];
+    this.addDie = function(die) {
+        this.currentDice.push(die);
+    };
+    this.getCurrentDice = function() {
+        return this.currentDice;
+    };
+    this.shakeCup = function() {
+        for (var j, x, i = this.currentDice.length; i; j = parseInt(Math.random() * i), x = this.currentDice[--i], this.currentDice[i] = this.currentDice[j], this.currentDice[j] = x);
     };
 }
