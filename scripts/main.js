@@ -2,12 +2,30 @@ $(function() {
 
     $('html').removeClass('no-js').addClass('js');
 
+    var greenDice = 6;
+    var yellowDice = 4;
+    var redDice = 3;
+
     var dieType = {
         'green': ['brain','run','brain','bang','run','brain'],
         'yellow': ['brain','run','bang','bang','run','brain'],
         'red': ['bang','run','bang','bang','run','brain']
     };
 
+    var cup = new Cup();
+
+    var newDice = createDice('green',greenDice);
+    cup.addDice(newDice);
+
+    newDice = createDice('yellow',yellowDice);
+    cup.addDice(newDice);
+
+    newDice = createDice('red',redDice);
+    cup.addDice(newDice);
+
+    cup.shakeCup();
+
+    console.log(cup.getContents());
     // var die = new Die('green');
     // var colour = die.getColour();
     // console.log(colour);
@@ -24,11 +42,6 @@ $(function() {
     // var p1Name = p1.getName();
     // console.log(p1Name);
 
-    // var cup = new Cup();
-    // cup.addDie(new Die('green'));
-    // cup.addDie(new Die('yellow'));
-    // cup.addDie(new Die('red'));
-    // cup.shakeCup();
 });
 
 // Obtain a random number between min & max (inclusive)
@@ -73,14 +86,16 @@ function Player(name) {
 }
 
 function Cup() {
-    this.currentDice = [];
-    this.addDie = function(die) {
-        this.currentDice.push(die);
+    this.contents = [];
+    this.addDice = function(dice) {
+        for (var i = 0; i < dice.length; i++) {
+            this.contents.push(dice[i]);
+        }
     };
-    this.getCurrentDice = function() {
-        return this.currentDice;
+    this.getContents = function() {
+        return this.contents;
     };
     this.shakeCup = function() {
-        for (var j, x, i = this.currentDice.length; i; j = parseInt(Math.random() * i), x = this.currentDice[--i], this.currentDice[i] = this.currentDice[j], this.currentDice[j] = x);
+        for (var j, x, i = this.contents.length; i; j = parseInt(Math.random() * i), x = this.contents[--i], this.contents[i] = this.contents[j], this.contents[j] = x);
     };
 }
